@@ -77,19 +77,19 @@ body {
 .options button.playerO {
   margin-left: 5px;
 }
-.select-box .credit {
+/* .select-box .credit {
   text-align: center;
   margin-top: 20px;
   font-size: 18px;
   font-weight: 500;
 }
 .select-box .credit a {
-  color: #5372F0;
+  color: var(--yellow);
   text-decoration: none;
 }
 .select-box .credit a:hover {
   text-decoration: underline;
-}
+} */
 .play-board {
   opacity: 0;
   pointer-events: none;
