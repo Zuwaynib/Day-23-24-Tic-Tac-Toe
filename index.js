@@ -90,19 +90,56 @@ function checkIdSign(val1, val2, val3, sign) {
 }
 
 // Determine the winner
+// function selectWinner() {
+//     const winningCombinations = [
+//         [1, 2, 3], [4, 5, 6], [7, 8, 9],
+//         [1, 4, 7], [2, 5, 8], [3, 6, 9],
+//         [1, 5, 9], [3, 5, 7]
+//     ];
+//     const isWinner = winningCombinations.some(combination => checkIdSign(...combination, playerSign));
+//     if (isWinner) {
+//         runBot = false; // Stop the bot
+//         setTimeout(() => {
+//             resultBox.classList.add("show");
+//             playBoard.classList.remove("show");
+//             wonText.innerHTML = `Player <p>${playerSign}</p> won the game!`;
+//         }, 700);
+//     } else if ([...allBox].every(box => box.id)) { // Check for a draw
+//         runBot = false;
+//         setTimeout(() => {
+//             resultBox.classList.add("show");
+//             playBoard.classList.remove("show");
+//             wonText.textContent = "Match has been drawn!";
+//         }, 700);
+//     }
+// }
+
 function selectWinner() {
     const winningCombinations = [
         [1, 2, 3], [4, 5, 6], [7, 8, 9],
         [1, 4, 7], [2, 5, 8], [3, 6, 9],
         [1, 5, 9], [3, 5, 7]
     ];
-    const isWinner = winningCombinations.some(combination => checkIdSign(...combination, playerSign));
-    if (isWinner) {
+    
+    let winner = null;
+
+    winningCombinations.forEach(combination => {
+        let [a, b, c] = combination;
+        let signA = getIdVal(a);
+        let signB = getIdVal(b);
+        let signC = getIdVal(c);
+
+        if (signA && signA === signB && signA === signC) {
+            winner = signA; // Set the winner to 'X' or 'O'
+        }
+    });
+
+    if (winner) {
         runBot = false; // Stop the bot
         setTimeout(() => {
             resultBox.classList.add("show");
             playBoard.classList.remove("show");
-            wonText.innerHTML = `Player <p>${playerSign}</p> won the game!`;
+            wonText.innerHTML = `Player <p>${winner}</p> won the game!`;
         }, 700);
     } else if ([...allBox].every(box => box.id)) { // Check for a draw
         runBot = false;
@@ -113,6 +150,7 @@ function selectWinner() {
         }, 700);
     }
 }
+
 
 // Replay button click event
 replayBtn.onclick = () => {
